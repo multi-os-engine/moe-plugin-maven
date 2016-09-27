@@ -78,6 +78,21 @@ public class XcodeBuidTask extends BuildGradleTask {
      * @parameter expression="${moe.simulator.udid}"
      */
     private String simulatorUdid;
+    
+    /**
+     * @parameter expression="${moe.gradle.console.info}"
+     */
+    private String infoMode;
+    
+    /**
+     * @parameter expression="${moe.gradle.console.debug}"
+     */
+    private String debugMode;
+    
+    /**
+     * @parameter expression="${moe.gradle.console.stacktrace}"
+     */
+    private String stacktraceMode;
 
     @Override
     protected String[] tasks() {
@@ -98,6 +113,24 @@ public class XcodeBuidTask extends BuildGradleTask {
             for (String arg : args) {
                 newArgs.add(arg);
             }
+        }
+        
+        boolean isInfo =
+        		infoMode == null || infoMode.isEmpty() ? false : Boolean.parseBoolean(infoMode);
+        if (isInfo) {
+        	newArgs.add("--info");
+        }
+        
+        boolean isDegug =
+        		debugMode == null || debugMode.isEmpty() ? false : Boolean.parseBoolean(debugMode);
+        if (isDegug) {
+        	newArgs.add("--debug");
+        }
+        
+        boolean isStrackrace =
+        		stacktraceMode == null || stacktraceMode.isEmpty() ? false : Boolean.parseBoolean(stacktraceMode);
+        if (isStrackrace) {
+        	newArgs.add("--stacktrace");
         }
 
         if (simulatorUdid != null && !simulatorUdid.isEmpty()) {
