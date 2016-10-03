@@ -12,7 +12,7 @@ $ mvn clean deploy
 <dependency>
   <groupId>org.multi-os-engine</groupId>
   <artifactId>moe-maven</artifactId>
-  <version>1.0.1</version>
+  <version>1.2.0</version>
   <type>pom</type>
 </dependency>
 ```
