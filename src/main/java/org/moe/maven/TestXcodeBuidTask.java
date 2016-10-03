@@ -16,6 +16,8 @@ limitations under the License.
 
 package org.moe.maven;
 
+import java.io.File;
+
 /**
  * @goal testxcodebuild
  * @execute phase="compile"
@@ -25,5 +27,10 @@ public class TestXcodeBuidTask extends XcodeBuidTask {
     @Override
     protected String[] tasks() {
         return new String[] { "moeTest" };
+    }
+    
+    protected void addSDKJars(StringBuilder stringBuilder) {
+    	stringBuilder.append(File.pathSeparator);
+    	stringBuilder.append(MOESdk.getJunitJar().getAbsolutePath());
     }
 }

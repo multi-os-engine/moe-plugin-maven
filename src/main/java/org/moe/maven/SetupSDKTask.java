@@ -93,7 +93,9 @@ public class SetupSDKTask extends GradleTask {
             }
 
             Artifact moe_junit = factory.createArtifact("moe.sdk", MOE_SDK_JUNIT_JAR, "1.0", "system", "jar");
-            moe_junit.setFile(new File(junitJarPath));
+            File junitJar = new File(junitJarPath);
+            moe_junit.setFile(junitJar);
+            MOESdk.setJunitJar(junitJar);
 
             try {
                 artifactResolver.resolve(moe_junit, remoteRepositories, localRepository);

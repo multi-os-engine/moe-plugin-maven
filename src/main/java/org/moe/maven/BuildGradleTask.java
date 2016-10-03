@@ -88,7 +88,6 @@ public abstract class BuildGradleTask extends GradleTask {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(MOE_PROGUARD_INJARS_KEY);
         stringBuilder.append(outputDirectory.getAbsolutePath());
-        getLog().info("Output directory: " + outputDirectory.getAbsolutePath());
 
         List<File> dependencies = getDependencies();
 
@@ -102,6 +101,8 @@ public abstract class BuildGradleTask extends GradleTask {
 
             stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         }
+        
+        addSDKJars(stringBuilder);
 
         String injarsParam = stringBuilder.toString();
         newArgs.add(injarsParam);
@@ -172,6 +173,10 @@ public abstract class BuildGradleTask extends GradleTask {
             }
         }
         return children;
+    }
+    
+    protected void addSDKJars(StringBuilder stringBuilder) {
+    	
     }
 
 }
