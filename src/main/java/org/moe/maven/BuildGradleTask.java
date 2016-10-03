@@ -51,6 +51,16 @@ public abstract class BuildGradleTask extends GradleTask {
      * @readonly
      */
     private DependencyGraphBuilder dependencyGraphBuilder;
+    
+    /**
+     * @parameter expression="${moe.gradle.log.level}"
+     */
+    private String gradleLogLevel;
+    
+    /**
+     * @parameter expression="${moe.gradle.stacktrace.level}"
+     */
+    private String gradleStacktraceLevel;
 
     @Override
     protected void addArguments() {
@@ -65,6 +75,14 @@ public abstract class BuildGradleTask extends GradleTask {
             for (String arg : args) {
                 newArgs.add(arg);
             }
+        }
+        
+        if (gradleLogLevel != null) {
+        	newArgs.add(gradleLogLevel);
+        }
+        
+        if (gradleStacktraceLevel != null) {
+        	newArgs.add(gradleStacktraceLevel);
         }
 
         StringBuilder stringBuilder = new StringBuilder();
