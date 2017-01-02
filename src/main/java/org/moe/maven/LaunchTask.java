@@ -31,17 +31,17 @@ public class LaunchTask extends BuildGradleTask {
     public static final String OPTIONS_KEY = "-Pmoe.launcher.options=";
 
     /**
-     * @parameter
+     * @parameter expression="${moe.devices}"
      */
     protected String[] deviceIds;
 
     /**
-     * @parameter
+     * @parameter expression="${moe.simulators}"
      */
     protected String[] simulatorIds;
 
     /**
-     * @parameter
+     * @parameter expression="${moe.options}"
      */
     protected String[] options;
 
