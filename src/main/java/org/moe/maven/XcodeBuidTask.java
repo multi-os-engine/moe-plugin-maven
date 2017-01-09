@@ -78,6 +78,11 @@ public class XcodeBuidTask extends BuildGradleTask {
      * @parameter expression="${moe.simulator.udid}"
      */
     private String simulatorUdid;
+    
+    /**
+     * @parameter expression="${moe.install.ontarget}"
+     */
+    private String installOnTarget;
 
     @Override
     protected String[] tasks() {
@@ -107,6 +112,13 @@ public class XcodeBuidTask extends BuildGradleTask {
         OptionsBuilder optionsBuilder = new OptionsBuilder();
 
         optionsBuilder.push("no-launch");
+        
+        boolean isInstallOnTarget =
+        		installOnTarget == null || installOnTarget.isEmpty() ? false : Boolean.parseBoolean(installOnTarget);
+        
+        if (isInstallOnTarget) {
+        	optionsBuilder.push("install-on-target");
+        }
 
         if (configuration != null && !configuration.isEmpty()) {
             optionsBuilder.push("config:" + configuration);
