@@ -33,4 +33,9 @@ public class TestXcodeBuidTask extends XcodeBuidTask {
     	stringBuilder.append(File.pathSeparator);
     	stringBuilder.append(MOESdk.getJunitJar().getAbsolutePath());
     }
+    
+    protected void addTestOutputDirectory(StringBuilder stringBuilder) {
+    	stringBuilder.append(File.pathSeparator);
+    	stringBuilder.append(testOutputDirectory.getAbsolutePath());
+	}
 }

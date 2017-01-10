@@ -41,6 +41,12 @@ public abstract class BuildGradleTask extends GradleTask {
      * @required
      */
     protected File outputDirectory;
+    
+    /**
+     * @parameter expression="${project.build.testOutputDirectory}"
+     * @required
+     */
+    protected File testOutputDirectory;
 
     @Parameter(defaultValue = "${session}", readonly = true, required = true) private MavenSession session;
 
@@ -55,12 +61,12 @@ public abstract class BuildGradleTask extends GradleTask {
     /**
      * @parameter expression="${moe.gradle.log.level}"
      */
-    private String gradleLogLevel;
+    protected String gradleLogLevel;
     
     /**
      * @parameter expression="${moe.gradle.stacktrace.level}"
      */
-    private String gradleStacktraceLevel;
+    protected String gradleStacktraceLevel;
 
     @Override
     protected void addArguments() {
@@ -88,6 +94,7 @@ public abstract class BuildGradleTask extends GradleTask {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(MOE_PROGUARD_INJARS_KEY);
         stringBuilder.append(outputDirectory.getAbsolutePath());
+        addTestOutputDirectory(stringBuilder);
 
         List<File> dependencies = getDependencies();
 
@@ -112,7 +119,7 @@ public abstract class BuildGradleTask extends GradleTask {
         newArgs.toArray(args);
     }
 
-    protected List<File> getDependencies() {
+	protected List<File> getDependencies() {
         List<File> dependenciesList = null;
         if (project != null) {
             dependenciesList = new ArrayList<File>();
@@ -178,5 +185,10 @@ public abstract class BuildGradleTask extends GradleTask {
     protected void addSDKJars(StringBuilder stringBuilder) {
     	
     }
+    
+    protected void addTestOutputDirectory(StringBuilder stringBuilder) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
