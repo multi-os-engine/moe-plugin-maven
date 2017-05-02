@@ -2,6 +2,25 @@
 
 ### Deploy to Bintray
 
+Add settings to .m2/settings.xml
+
+```xml
+
+...
+
+<servers>
+  <server>
+    <id>bintray-repo-moe-maven</id>
+    <username>your user name</username>
+    <password>******</password>
+  </server>
+</servers>
+
+...
+
+
+```
+
 ```sh
 $ mvn clean deploy
 ```
