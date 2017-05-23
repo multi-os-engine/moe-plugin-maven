@@ -31,7 +31,7 @@ $ mvn clean deploy
 <dependency>
   <groupId>org.multi-os-engine</groupId>
   <artifactId>moe-maven</artifactId>
-  <version>1.3.0</version>
+  <version>1.3.1</version>
   <type>pom</type>
 </dependency>
 ```
