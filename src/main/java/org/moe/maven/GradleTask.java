@@ -140,8 +140,11 @@ public abstract class GradleTask extends AbstractMojo {
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
             if (!isPrintTask()) {
                 launcher.setStandardOutput(baos);
+                launcher.setStandardError(baos);
             } else {
-                launcher.setStandardOutput(new ConsolePrinter());
+                final ConsolePrinter console = new ConsolePrinter();
+                launcher.setStandardOutput(console);
+                launcher.setStandardError(console);
             }
 
             launcher.forTasks(tasks());
@@ -166,8 +169,8 @@ public abstract class GradleTask extends AbstractMojo {
 
                 @Override
                 public void onFailure(GradleConnectionException exc) {
-                    completed = true;
                     exception = exc;
+                    completed = true;
                     //Print error
                     if (!isPrintTask()) {
                         printErrorOutputToLog(baos);
@@ -186,7 +189,15 @@ public abstract class GradleTask extends AbstractMojo {
             }
 
             if (exception != null) {
-                throw new MojoFailureException(exception.getMessage());
+                StringBuilder msg = new StringBuilder();
+                Throwable throwable = exception;
+                while (throwable != null) {
+                    if (throwable.getMessage() != null) {
+                        msg.append(throwable.getMessage()).append("\n");
+                    }
+                    throwable = throwable.getCause();
+                }
+                throw new MojoFailureException(msg.toString());
             }
         } finally {
             if (connection != null) {
@@ -284,7 +295,7 @@ public abstract class GradleTask extends AbstractMojo {
 
     private class ConsolePrinter extends OutputStream {
 
-        private String line;
+        private String line = "";
 
         @Override
         public void write(int b) throws IOException {
