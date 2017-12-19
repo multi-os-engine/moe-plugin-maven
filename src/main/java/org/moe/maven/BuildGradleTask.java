@@ -129,7 +129,8 @@ public abstract class BuildGradleTask extends GradleTask {
             for (Artifact artifact : artifacts) {
                 if (artifact.getArtifactId().equals(SetupSDKTask.MOE_SDK_PLATFORM_JAR) || artifact.getArtifactId()
                         .equals(SetupSDKTask.MOE_SDK_CORE_JAR) || artifact.getArtifactId()
-                        .equals(SetupSDKTask.MOE_SDK_JUNIT_JAR)) {
+                        .equals(SetupSDKTask.MOE_SDK_JUNIT_JAR) || artifact.getArtifactId()
+                        .equals(SetupSDKTask.MOE_SDK_JAVA8SUPPORT_JAR)) {
 
                     continue;
                 }
